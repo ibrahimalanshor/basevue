@@ -26,4 +26,23 @@ describe.only('input component', () => {
     expect(wrapper.classes('p-4')).toBe(true);
     expect(wrapper.classes('border')).toBe(true);
   });
+
+  // type
+  test('should have default type', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('type')).toEqual('text');
+    expect(wrapper.find('input').attributes('type')).toEqual('text');
+  });
+  test('should have type from props', async () => {
+    const types = ['email', 'password'];
+    const wrapper = mount(BaseVueInput);
+
+    for (const type of types) {
+      await wrapper.setProps({ type });
+
+      expect(wrapper.props('type')).toEqual(type);
+      expect(wrapper.find('input').attributes('type')).toEqual(type);
+    }
+  });
 });
