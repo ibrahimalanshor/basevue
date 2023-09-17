@@ -4,10 +4,16 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   props: {
     text: String,
-    classes: {
+    baseClass: String,
+    levelClass: {
       type: Object,
       default: () => ({
-        base: '',
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
       }),
     },
     level: {
@@ -20,7 +26,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <component :is="`h${level}`" :class="[classes.base]">
+  <component :is="`h${level}`" :class="[baseClass, levelClass[level]]">
     <slot>{{ text }}</slot>
   </component>
 </template>

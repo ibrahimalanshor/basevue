@@ -6,7 +6,7 @@ describe.only('title component', () => {
   test('should render heading element', () => {
     const wrapper = mount(BaseVueTitle);
 
-    expect(wrapper.find('h1').exists()).toBeTruthy();
+    expect(wrapper.find('h1').exists()).toBe(true);
   });
 
   test('should render text default slot', () => {
@@ -35,20 +35,24 @@ describe.only('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
-  test('should have default base classes', () => {
+  test('should have default classes', () => {
     const wrapper = mount(BaseVueTitle);
 
-    expect(wrapper.props('classes')).toEqual({
-      base: '',
+    expect(wrapper.props('baseClass')).toBeUndefined();
+    expect(wrapper.props('levelClass')).toEqual({
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
     });
   });
 
   test('should have base class from props', () => {
     const wrapper = mount(BaseVueTitle, {
       props: {
-        classes: {
-          base: 'font-bold text-lg',
-        },
+        baseClass: 'font-bold text-lg',
       },
     });
 
@@ -62,14 +66,29 @@ describe.only('title component', () => {
     expect(wrapper.props('level')).toEqual(1);
   });
 
-  test.only('should render heading element with different level from props', async () => {
-    const wrapper = mount(BaseVueTitle);
+  test('should render heading element with different level from props', async () => {
+    const levelClass: Record<number, string> = {
+      1: 'text-5xl',
+      2: 'text-4xl',
+      3: 'text-3xl',
+      4: 'text-2xl',
+      5: 'text-xl',
+      6: 'text-lg',
+    };
+    const wrapper = mount(BaseVueTitle, {
+      props: {
+        levelClass,
+      },
+    });
     const levels = [1, 2, 3, 4, 5, 6];
 
     for (const level of levels) {
       await wrapper.setProps({ level });
 
-      expect(wrapper.find(`h${level}`).exists()).toBe(true);
+      const heading = wrapper.find(`h${level}`);
+
+      expect(heading.exists()).toBe(true);
+      expect(heading.classes(levelClass[level])).toBe(true);
     }
   });
 });
