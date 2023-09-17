@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
-import { h, warn } from 'vue';
+import { h } from 'vue';
 
-describe.only('list component', () => {
+describe('list component', () => {
   // element
   test('should render ul component', () => {
     const wrapper = mount(BaseVueList);
@@ -117,7 +117,8 @@ describe.only('list component', () => {
     expect(itemA.map((item) => item.text())).toEqual(items);
   });
 
-  test.only('should render empty slot when item empty', async () => {
+  // empty
+  test('should render empty slot when item empty', async () => {
     const wrapper = mount(BaseVueList, {
       slots: {
         empty: () => h('p', 'Empty'),
