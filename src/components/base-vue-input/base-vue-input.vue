@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { PropType, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'BaseVueInput',
@@ -19,6 +19,16 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    color: {
+      type: String,
+      default: 'default',
+    },
+    colorClass: {
+      type: Object as PropType<Record<string | 'default', string>>,
+      default: () => ({
+        default: '',
+      }),
+    },
   },
   emits: ['clear'],
   setup({}, { emit }) {
@@ -35,7 +45,7 @@ export default defineComponent({
   <div :class="wrapperClass">
     <input
       :type="type"
-      :class="inputClass"
+      :class="[inputClass, colorClass[color]]"
       :placeholder="placeholder"
       :disabled="disabled"
     />

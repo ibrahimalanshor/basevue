@@ -165,4 +165,34 @@ describe.only('input component', () => {
     expect(wrapper.find('button').exists()).toBe(false);
     expect(wrapper.find('span').exists()).toBe(false);
   });
+
+  // color
+  test('should have default color', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('color')).toEqual('default');
+    expect(wrapper.props('colorClass')).toEqual({ default: '' });
+  });
+  test('should have color class by color props', async () => {
+    const colors: Record<string, string> = {
+      success: 'border-green',
+      error: 'border-red',
+    };
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        colorClass: {
+          default: 'border-gray',
+          ...colors,
+        },
+      },
+    });
+
+    expect(wrapper.find('input').classes('border-gray')).toBe(true);
+
+    for (const color in colors) {
+      await wrapper.setProps({ color });
+
+      expect(wrapper.find('input').classes(colors[color])).toBe(true);
+    }
+  });
 });
