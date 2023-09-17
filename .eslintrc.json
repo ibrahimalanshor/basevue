@@ -6,8 +6,9 @@
     "extends": "plugin:vue/vue3-essential",
     "overrides": [
     ],
-    "parser": "@typescript-eslint/parser",
+    "parser": "vue-eslint-parser",
     "parserOptions": {
+        "parser": "@typescript-eslint/parser",
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
@@ -16,5 +17,6 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "vue/multi-word-component-names": 0
     }
 }
