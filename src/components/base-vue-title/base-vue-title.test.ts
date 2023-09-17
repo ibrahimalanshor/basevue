@@ -9,10 +9,20 @@ describe.only('title component', () => {
     expect(wrapper.find('h1')).toBeTruthy();
   });
 
-  test('should render title default slot', () => {
+  test('should render text default slot', () => {
     const wrapper = mount(BaseVueTitle, {
       slots: {
         default: 'Something',
+      },
+    });
+
+    expect(wrapper.text()).toEqual('Something');
+  });
+
+  test('should render text from text props', () => {
+    const wrapper = mount(BaseVueTitle, {
+      props: {
+        text: 'Something',
       },
     });
 
