@@ -20,7 +20,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1 :class="[classes.base]">
+  <component :is="`h${level}`" :class="[classes.base]">
     <slot>{{ text }}</slot>
-  </h1>
+  </component>
 </template>

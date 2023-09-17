@@ -6,7 +6,7 @@ describe.only('title component', () => {
   test('should render heading element', () => {
     const wrapper = mount(BaseVueTitle);
 
-    expect(wrapper.find('h1')).toBeTruthy();
+    expect(wrapper.find('h1').exists()).toBeTruthy();
   });
 
   test('should render text default slot', () => {
@@ -19,7 +19,7 @@ describe.only('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
-  test('should have default text props to undefined', async () => {
+  test('should have default text props to undefined', () => {
     const wrapper = mount(BaseVueTitle);
 
     expect(wrapper.props('text')).toBeUndefined();
@@ -35,7 +35,7 @@ describe.only('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
-  test('should have default base classes', async () => {
+  test('should have default base classes', () => {
     const wrapper = mount(BaseVueTitle);
 
     expect(wrapper.props('classes')).toEqual({
@@ -56,9 +56,20 @@ describe.only('title component', () => {
     expect(wrapper.classes('text-lg')).toBe(true);
   });
 
-  test('should have default level props to 1', async () => {
+  test('should have default level props to 1', () => {
     const wrapper = mount(BaseVueTitle);
 
     expect(wrapper.props('level')).toEqual(1);
+  });
+
+  test.only('should render heading element with different level from props', async () => {
+    const wrapper = mount(BaseVueTitle);
+    const levels = [1, 2, 3, 4, 5, 6];
+
+    for (const level of levels) {
+      await wrapper.setProps({ level });
+
+      expect(wrapper.find(`h${level}`).exists()).toBe(true);
+    }
   });
 });
