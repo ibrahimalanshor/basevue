@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueTitle from './base-vue-title.vue';
 
-describe.only('title component', () => {
+describe('title component', () => {
   test('should render heading element', () => {
     const wrapper = mount(BaseVueTitle);
 
@@ -47,6 +47,7 @@ describe.only('title component', () => {
       5: '',
       6: '',
     });
+    expect(wrapper.props('centerClass')).toBeUndefined();
   });
 
   test('should have base class from props', () => {
@@ -90,5 +91,22 @@ describe.only('title component', () => {
       expect(heading.exists()).toBe(true);
       expect(heading.classes(levelClass[level])).toBe(true);
     }
+  });
+
+  test('should have default center props to false', () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('center')).toBe(false);
+  });
+
+  test('should have center class if center props is true', () => {
+    const wrapper = mount(BaseVueTitle, {
+      props: {
+        center: true,
+        centerClass: 'text-center',
+      },
+    });
+
+    expect(wrapper.classes('text-center')).toBe(true);
   });
 });

@@ -16,17 +16,25 @@ export default defineComponent({
         6: '',
       }),
     },
+    centerClass: String,
     level: {
       type: Number,
       in: [1, 2, 3, 4, 5, 6],
       default: 1,
+    },
+    center: {
+      type: Boolean,
+      default: false,
     },
   },
 });
 </script>
 
 <template>
-  <component :is="`h${level}`" :class="[baseClass, levelClass[level]]">
+  <component
+    :is="`h${level}`"
+    :class="[baseClass, levelClass[level], center ? centerClass : null]"
+  >
     <slot>{{ text }}</slot>
   </component>
 </template>
