@@ -28,4 +28,17 @@ describe.only('title component', () => {
 
     expect(wrapper.text()).toEqual('Something');
   });
+
+  test('should have base class from props', () => {
+    const wrapper = mount(BaseVueTitle, {
+      props: {
+        classes: {
+          base: 'font-bold text-lg',
+        },
+      },
+    });
+
+    expect(wrapper.classes('font-bold')).toBe(true);
+    expect(wrapper.classes('text-lg')).toBe(true);
+  });
 });
