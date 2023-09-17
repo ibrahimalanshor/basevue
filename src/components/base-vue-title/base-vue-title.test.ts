@@ -19,6 +19,12 @@ describe.only('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
+  test('should have default text props to undefined', async () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('text')).toBeUndefined();
+  });
+
   test('should render text from text props', () => {
     const wrapper = mount(BaseVueTitle, {
       props: {
@@ -27,6 +33,14 @@ describe.only('title component', () => {
     });
 
     expect(wrapper.text()).toEqual('Something');
+  });
+
+  test('should have default base classes', async () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('classes')).toEqual({
+      base: '',
+    });
   });
 
   test('should have base class from props', () => {
