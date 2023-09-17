@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
-import { h } from 'vue';
+import { h, warn } from 'vue';
 
-describe('list component', () => {
+describe.only('list component', () => {
   // element
   test('should render ul component', () => {
     const wrapper = mount(BaseVueList);
@@ -115,5 +115,22 @@ describe('list component', () => {
 
     expect(itemA).toHaveLength(2);
     expect(itemA.map((item) => item.text())).toEqual(items);
+  });
+
+  test.only('should render empty slot when item empty', async () => {
+    const wrapper = mount(BaseVueList, {
+      slots: {
+        empty: () => h('p', 'Empty'),
+      },
+    });
+
+    expect(wrapper.find('p').exists()).toBe(true);
+    expect(wrapper.find('p').text()).toEqual('Empty');
+
+    await wrapper.setProps({
+      items: ['item 1', 'item 2'],
+    });
+
+    expect(wrapper.find('p').exists()).toBe(false);
   });
 });

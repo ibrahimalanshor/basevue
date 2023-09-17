@@ -25,6 +25,7 @@ export default defineComponent({
 
 <template>
   <ul :class="wrapperClass">
+    <slot v-if="!items.length" name="empty" />
     <template
       v-for="item in items"
       :key="typeof item === 'object' ? item.id : item"
