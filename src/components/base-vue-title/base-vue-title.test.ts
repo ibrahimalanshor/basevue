@@ -4,7 +4,7 @@ import BaseVueTitle from './base-vue-title.vue';
 import { Weight } from './base-vue-title.interface';
 
 describe('title component', () => {
-  // default
+  // element
   test('should render heading element', () => {
     const wrapper = mount(BaseVueTitle);
 
