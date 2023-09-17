@@ -12,6 +12,14 @@ export default defineComponent({
       default: () => [],
     },
   },
+  emits: ['click-item'],
+  setup(props, { emit }) {
+    function handleClickItem(item: string | ListItem) {
+      emit('click-item', item);
+    }
+
+    return { handleClickItem };
+  },
 });
 </script>
 
@@ -19,9 +27,9 @@ export default defineComponent({
   <ul :class="wrapperClass">
     <template
       v-for="item in items"
-      :key="typeof item === 'object' ? item.name : item"
+      :key="typeof item === 'object' ? item.id : item"
     >
-      <li :class="itemClass">
+      <li :class="itemClass" v-on:click="handleClickItem(item)">
         {{ typeof item === 'object' ? item.name : item }}
       </li>
     </template>

@@ -84,4 +84,23 @@ describe.only('list component', () => {
 
     expect(wrapper.find('li').classes('p-4')).toBe(true);
   });
+
+  // event
+  test('should emit on click event with item detail', async () => {
+    const items = ['item 1', 'item 2'];
+    const wrapper = mount(BaseVueList, {
+      props: {
+        items,
+      },
+    });
+
+    for (const itemEl of wrapper.findAll('li')) {
+      await itemEl.trigger('click');
+    }
+
+    const emitted = wrapper.emitted();
+
+    expect(emitted['click-item']).toHaveLength(2);
+    expect(emitted['click-item']).toEqual(items.map((item) => [item]));
+  });
 });
