@@ -49,6 +49,26 @@ describe.only('list component', () => {
       expect(item.text()).toEqual(items[index]);
     });
   });
+  test('should render object item', () => {
+    const items = [
+      { id: 1, name: 'item 1' },
+      { id: 2, name: 'item 2' },
+      { id: 3, name: 'item 3' },
+    ];
+    const wrapper = mount(BaseVueList, {
+      props: {
+        items,
+      },
+    });
+
+    const wrapperItems = wrapper.findAll('li');
+
+    expect(wrapperItems).toHaveLength(items.length);
+
+    wrapperItems.forEach((item, index) => {
+      expect(item.text()).toEqual(items[index].name);
+    });
+  });
   test('should have default item class', () => {
     const wrapper = mount(BaseVueList);
 

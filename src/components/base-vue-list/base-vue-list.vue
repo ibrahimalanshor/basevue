@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { PropType, defineComponent } from 'vue';
+import { ListItem } from './base-vue-list.interface';
 
 export default defineComponent({
   name: 'BaseVueList',
@@ -7,7 +8,7 @@ export default defineComponent({
     wrapperClass: String,
     itemClass: String,
     items: {
-      type: Array,
+      type: Array as PropType<string[] | ListItem[]>,
       default: () => [],
     },
   },
@@ -16,8 +17,13 @@ export default defineComponent({
 
 <template>
   <ul :class="wrapperClass">
-    <template v-for="item in items" :key="item">
-      <li :class="itemClass">{{ item }}</li>
+    <template
+      v-for="item in items"
+      :key="typeof item === 'object' ? item.name : item"
+    >
+      <li :class="itemClass">
+        {{ typeof item === 'object' ? item.name : item }}
+      </li>
     </template>
   </ul>
 </template>
