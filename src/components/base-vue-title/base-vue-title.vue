@@ -10,6 +10,11 @@ export default defineComponent({
         base: '',
       }),
     },
+    level: {
+      type: Number,
+      in: [1, 2, 3, 4, 5, 6],
+      default: 1,
+    },
   },
 });
 </script>

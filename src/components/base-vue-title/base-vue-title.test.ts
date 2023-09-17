@@ -41,4 +41,10 @@ describe.only('title component', () => {
     expect(wrapper.classes('font-bold')).toBe(true);
     expect(wrapper.classes('text-lg')).toBe(true);
   });
+
+  test('should have default level props to 1', async () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('level')).toEqual(1);
+  });
 });
