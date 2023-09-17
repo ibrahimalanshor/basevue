@@ -5,18 +5,13 @@ export default defineComponent({
   name: 'BaseVueText',
   props: {
     text: String,
-    classes: {
-      type: Object,
-      default: () => ({
-        base: '',
-      }),
-    },
+    baseClass: String,
   },
 });
 </script>
 
 <template>
-  <p :class="[classes.base]">
+  <p :class="[baseClass]">
     <slot>{{ text }}</slot>
   </p>
 </template>
