@@ -5,6 +5,10 @@ export default defineComponent({
   name: 'BaseVueList',
   props: {
     wrapperClass: String,
+    items: {
+      type: Array,
+      default: () => [],
+    },
   },
 });
 </script>
