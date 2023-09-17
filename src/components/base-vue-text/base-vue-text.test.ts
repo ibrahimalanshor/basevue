@@ -35,14 +35,12 @@ describe('text component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
-  // default class
+  // base
   test('should have default classes', () => {
     const wrapper = mount(BaseVueText);
 
     expect(wrapper.props('baseClass')).toBeUndefined();
   });
-
-  // base
   test('should have base class from props', () => {
     const wrapper = mount(BaseVueText, {
       props: {

@@ -36,29 +36,12 @@ describe('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
 
-  // default class
-  test('should have default classes', () => {
+  // base
+  test('should have default base classes', () => {
     const wrapper = mount(BaseVueTitle);
 
     expect(wrapper.props('baseClass')).toBeUndefined();
-    expect(wrapper.props('levelClass')).toEqual({
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-      5: '',
-      6: '',
-    });
-    expect(wrapper.props('centerClass')).toBeUndefined();
-    expect(wrapper.props('weightClass')).toEqual({
-      normal: '',
-      medium: '',
-      semibold: '',
-      bold: '',
-    });
   });
-
-  // base class
   test('should have base class from props', () => {
     const wrapper = mount(BaseVueTitle, {
       props: {
@@ -71,6 +54,18 @@ describe('title component', () => {
   });
 
   // level
+  test('should have default level classes', () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('levelClass')).toEqual({
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
+    });
+  });
   test('should have default level props to 1', () => {
     const wrapper = mount(BaseVueTitle);
 
@@ -103,6 +98,11 @@ describe('title component', () => {
   });
 
   // center
+  test('should have default center classes', () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('centerClass')).toBeUndefined();
+  });
   test('should have default center props to false', () => {
     const wrapper = mount(BaseVueTitle);
 
@@ -120,6 +120,16 @@ describe('title component', () => {
   });
 
   // weight
+  test('should have default classes', () => {
+    const wrapper = mount(BaseVueTitle);
+
+    expect(wrapper.props('weightClass')).toEqual({
+      normal: '',
+      medium: '',
+      semibold: '',
+      bold: '',
+    });
+  });
   test('should have default weight props to bold', () => {
     const wrapper = mount(BaseVueTitle);
 
