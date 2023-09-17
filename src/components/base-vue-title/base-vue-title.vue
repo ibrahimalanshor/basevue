@@ -17,6 +17,15 @@ export default defineComponent({
       }),
     },
     centerClass: String,
+    weightClass: {
+      type: Object,
+      default: () => ({
+        normal: '',
+        medium: '',
+        semibold: '',
+        bold: '',
+      }),
+    },
     level: {
       type: Number,
       in: [1, 2, 3, 4, 5, 6],
@@ -26,6 +35,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    weight: {
+      type: String,
+      default: 'bold',
+    },
   },
 });
 </script>
@@ -33,7 +46,12 @@ export default defineComponent({
 <template>
   <component
     :is="`h${level}`"
-    :class="[baseClass, levelClass[level], center ? centerClass : null]"
+    :class="[
+      baseClass,
+      levelClass[level],
+      center && centerClass,
+      weightClass[weight],
+    ]"
   >
     <slot>{{ text }}</slot>
   </component>
