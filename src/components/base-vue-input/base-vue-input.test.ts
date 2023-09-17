@@ -65,4 +65,22 @@ describe.only('input component', () => {
       'Something',
     );
   });
+
+  // disabled
+  test('should have default disabled', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('disabled')).toBe(false);
+    expect(wrapper.find('input').attributes('disabled')).toBeUndefined();
+  });
+  test('should have disabled from props', async () => {
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        disabled: true,
+      },
+    });
+
+    expect(wrapper.props('disabled')).toBe(true);
+    expect(wrapper.find('input').attributes('disabled')).toBeDefined();
+  });
 });

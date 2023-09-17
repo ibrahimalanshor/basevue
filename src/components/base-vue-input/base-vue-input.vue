@@ -10,10 +10,19 @@ export default defineComponent({
       default: 'text',
     },
     placeholder: String,
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
 
 <template>
-  <input :type="type" :class="baseClass" :placeholder="placeholder" />
+  <input
+    :type="type"
+    :class="baseClass"
+    :placeholder="placeholder"
+    :disabled="disabled"
+  />
 </template>
