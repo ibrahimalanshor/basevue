@@ -37,6 +37,8 @@ export default defineComponent({
     :placeholder="placeholder"
     :disabled="disabled"
   />
-  <slot name="clear" :clear="handleClear" />
-  <slot name="loading" />
+  <slot name="right-content">
+    <slot name="clear" :clear="handleClear" />
+    <slot name="loading" />
+  </slot>
 </template>

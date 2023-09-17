@@ -129,4 +129,22 @@ describe.only('input component', () => {
     expect(wrapper.props('loading')).toBe(true);
     expect(wrapper.find('button').exists()).toBe(true);
   });
+
+  // right content
+  test('should render right content', () => {
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        loading: true,
+      },
+      slots: {
+        'right-content': () => h('a'),
+        loading: () => h('button'),
+        clear: () => h('span'),
+      },
+    });
+
+    expect(wrapper.find('a').exists()).toBe(true);
+    expect(wrapper.find('button').exists()).toBe(false);
+    expect(wrapper.find('span').exists()).toBe(false);
+  });
 });
