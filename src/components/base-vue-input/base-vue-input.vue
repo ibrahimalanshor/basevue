@@ -14,6 +14,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['clear'],
   setup({}, { emit }) {
@@ -34,4 +38,5 @@ export default defineComponent({
     :disabled="disabled"
   />
   <slot name="clear" :clear="handleClear" />
+  <slot name="loading" />
 </template>

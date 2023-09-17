@@ -108,4 +108,25 @@ describe.only('input component', () => {
 
     expect(emitted).toHaveProperty('clear');
   });
+
+  // loading
+  test('should have default loading', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('loading')).toBe(false);
+    expect(wrapper.find('button.loading').exists()).toBe(false);
+  });
+  test('should render loading slot', () => {
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        loading: true,
+      },
+      slots: {
+        loading: () => h('button', { class: 'loaidng' }, 'loading'),
+      },
+    });
+
+    expect(wrapper.props('loading')).toBe(true);
+    expect(wrapper.find('button').exists()).toBe(true);
+  });
 });
