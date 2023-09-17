@@ -4,7 +4,8 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'BaseVueInput',
   props: {
-    baseClass: String,
+    wrapperClass: String,
+    inputClass: String,
     type: {
       type: String,
       default: 'text',
@@ -31,14 +32,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <input
-    :type="type"
-    :class="baseClass"
-    :placeholder="placeholder"
-    :disabled="disabled"
-  />
-  <slot name="right-content">
-    <slot name="clear" :clear="handleClear" />
-    <slot name="loading" />
-  </slot>
+  <div :class="wrapperClass">
+    <input
+      :type="type"
+      :class="inputClass"
+      :placeholder="placeholder"
+      :disabled="disabled"
+    />
+    <slot name="right-content">
+      <slot name="clear" :clear="handleClear" />
+      <slot name="loading" />
+    </slot>
+  </div>
 </template>

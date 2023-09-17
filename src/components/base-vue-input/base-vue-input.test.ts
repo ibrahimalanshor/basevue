@@ -8,19 +8,37 @@ describe.only('input component', () => {
   test('should render input element', () => {
     const wrapper = mount(BaseVueInput);
 
+    expect(wrapper.find('div').exists()).toBe(true);
     expect(wrapper.find('input').exists()).toBe(true);
   });
 
-  // base class
-  test('should have default base class', () => {
+  // wrapper class
+  test('should have default wrapper class', () => {
     const wrapper = mount(BaseVueInput);
 
-    expect(wrapper.props('baseClass')).toBeUndefined();
+    expect(wrapper.props('wrapper')).toBeUndefined();
   });
-  test('should have base class from props', () => {
+  test('should have wrapper class from props', () => {
     const wrapper = mount(BaseVueInput, {
       props: {
-        baseClass: 'p-4 border',
+        wrapperClass: 'space-y-2 relative',
+      },
+    });
+
+    expect(wrapper.find('div').classes('space-y-2')).toBe(true);
+    expect(wrapper.find('div').classes('relative')).toBe(true);
+  });
+
+  // input class
+  test('should have default input class', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('inputClass')).toBeUndefined();
+  });
+  test('should have input class from props', () => {
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        inputClass: 'p-4 border',
       },
     });
 
