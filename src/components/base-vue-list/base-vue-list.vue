@@ -29,9 +29,11 @@ export default defineComponent({
       v-for="item in items"
       :key="typeof item === 'object' ? item.id : item"
     >
-      <li :class="itemClass" v-on:click="handleClickItem(item)">
-        {{ typeof item === 'object' ? item.name : item }}
-      </li>
+      <slot name="item" :item="item">
+        <li :class="itemClass" v-on:click="handleClickItem(item)">
+          {{ typeof item === 'object' ? item.name : item }}
+        </li>
+      </slot>
     </template>
   </ul>
 </template>

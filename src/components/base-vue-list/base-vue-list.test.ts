@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
+import { h } from 'vue';
 
-describe.only('list component', () => {
+describe('list component', () => {
   // element
   test('should render ul component', () => {
     const wrapper = mount(BaseVueList);
@@ -44,10 +45,7 @@ describe.only('list component', () => {
     const wrapperItems = wrapper.findAll('li');
 
     expect(wrapperItems).toHaveLength(items.length);
-
-    wrapperItems.forEach((item, index) => {
-      expect(item.text()).toEqual(items[index]);
-    });
+    expect(wrapperItems.map((item) => item.text())).toEqual(items);
   });
   test('should render object item', () => {
     const items = [
@@ -64,10 +62,9 @@ describe.only('list component', () => {
     const wrapperItems = wrapper.findAll('li');
 
     expect(wrapperItems).toHaveLength(items.length);
-
-    wrapperItems.forEach((item, index) => {
-      expect(item.text()).toEqual(items[index].name);
-    });
+    expect(wrapperItems.map((item) => item.text())).toEqual(
+      items.map((item) => item.name),
+    );
   });
   test('should have default item class', () => {
     const wrapper = mount(BaseVueList);
@@ -102,5 +99,21 @@ describe.only('list component', () => {
 
     expect(emitted['click-item']).toHaveLength(2);
     expect(emitted['click-item']).toEqual(items.map((item) => [item]));
+  });
+
+  // item slot
+  test('should render item using item slot', () => {
+    const items = ['item 1', 'item 2'];
+    const wrapper = mount(BaseVueList, {
+      props: { items },
+      slots: {
+        item: (props: { item: string }) => h('a', { href: '#' }, props.item),
+      },
+    });
+
+    const itemA = wrapper.findAll('a');
+
+    expect(itemA).toHaveLength(2);
+    expect(itemA.map((item) => item.text())).toEqual(items);
   });
 });
