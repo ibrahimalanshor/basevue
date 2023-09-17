@@ -3,9 +3,34 @@ import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
 
 describe.only('list component', () => {
+  // element
   test('should render div component', () => {
     const wrapper = mount(BaseVueList);
 
     expect(wrapper.find('div').exists()).toBe(true);
+  });
+
+  // wrapper
+  test('should have default wrapper class props', () => {
+    const wrapper = mount(BaseVueList);
+
+    expect(wrapper.props('wrapperClass')).toBeUndefined();
+  });
+  test('should have wrapper class from props', () => {
+    const wrapper = mount(BaseVueList, {
+      props: {
+        wrapperClass: 'p-4 space-y-2',
+      },
+    });
+
+    expect(wrapper.classes('p-4')).toBe(true);
+    expect(wrapper.classes('space-y-2')).toBe(true);
+  });
+
+  // items
+  test('should have default items props', () => {
+    const wrapper = mount(BaseVueList);
+
+    expect(wrapper.props('items')).toEqual([]);
   });
 });
