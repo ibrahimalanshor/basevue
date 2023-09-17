@@ -22,4 +22,17 @@ describe('text component', () => {
 
     expect(wrapper.text()).toEqual('Something');
   });
+
+  test('should have base class from props', () => {
+    const wrapper = mount(BaseVueText, {
+      props: {
+        classes: {
+          base: 'text-xl text-gray-500',
+        },
+      },
+    });
+
+    expect(wrapper.classes('text-xl')).toBe(true);
+    expect(wrapper.classes('text-gray-500')).toBe(true);
+  });
 });
