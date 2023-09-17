@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueInput from './base-vue-input.vue';
+import { h } from 'vue';
 
 describe.only('input component', () => {
   // element
@@ -23,8 +24,8 @@ describe.only('input component', () => {
       },
     });
 
-    expect(wrapper.classes('p-4')).toBe(true);
-    expect(wrapper.classes('border')).toBe(true);
+    expect(wrapper.find('input').classes('p-4')).toBe(true);
+    expect(wrapper.find('input').classes('border')).toBe(true);
   });
 
   // type
@@ -82,5 +83,29 @@ describe.only('input component', () => {
 
     expect(wrapper.props('disabled')).toBe(true);
     expect(wrapper.find('input').attributes('disabled')).toBeDefined();
+  });
+
+  // clear
+  test('should render clear slot', () => {
+    const wrapper = mount(BaseVueInput, {
+      slots: {
+        clear: () => h('button', 'clear'),
+      },
+    });
+
+    expect(wrapper.find('button').exists()).toBe(true);
+  });
+  test('should emit clear when cleared', async () => {
+    const wrapper = mount(BaseVueInput, {
+      slots: {
+        clear: ({ clear }) => h('button', { onClick: clear }, 'clear'),
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+
+    const emitted = wrapper.emitted();
+
+    expect(emitted).toHaveProperty('clear');
   });
 });

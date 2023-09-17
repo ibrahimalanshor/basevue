@@ -15,6 +15,14 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: ['clear'],
+  setup({}, { emit }) {
+    function handleClear() {
+      emit('clear');
+    }
+
+    return { handleClear };
+  },
 });
 </script>
 
@@ -25,4 +33,5 @@ export default defineComponent({
     :placeholder="placeholder"
     :disabled="disabled"
   />
+  <slot name="clear" :clear="handleClear" />
 </template>
