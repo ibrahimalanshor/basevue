@@ -11,12 +11,12 @@ describe.only('list component', () => {
   });
 
   // wrapper
-  test('should have default wrapper class props', () => {
+  test('should have default wrapper class', () => {
     const wrapper = mount(BaseVueList);
 
     expect(wrapper.props('wrapperClass')).toBeUndefined();
   });
-  test('should have wrapper class from props', () => {
+  test('should have wrapper class', () => {
     const wrapper = mount(BaseVueList, {
       props: {
         wrapperClass: 'p-4 space-y-2',
@@ -28,12 +28,12 @@ describe.only('list component', () => {
   });
 
   // items
-  test('should have default items props', () => {
+  test('should have default items', () => {
     const wrapper = mount(BaseVueList);
 
     expect(wrapper.props('items')).toEqual([]);
   });
-  test('should render item element from props', () => {
+  test('should render item', () => {
     const items = ['item 1', 'item 2', 'item 3'];
     const wrapper = mount(BaseVueList, {
       props: {
@@ -48,5 +48,20 @@ describe.only('list component', () => {
     wrapperItems.forEach((item, index) => {
       expect(item.text()).toEqual(items[index]);
     });
+  });
+  test('should have default item class', () => {
+    const wrapper = mount(BaseVueList);
+
+    expect(wrapper.props('itemClass')).toBeUndefined();
+  });
+  test('should have default item class', () => {
+    const wrapper = mount(BaseVueList, {
+      props: {
+        items: ['item'],
+        itemClass: 'p-4',
+      },
+    });
+
+    expect(wrapper.find('li').classes('p-4')).toBe(true);
   });
 });

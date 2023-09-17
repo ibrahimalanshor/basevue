@@ -5,6 +5,7 @@ export default defineComponent({
   name: 'BaseVueList',
   props: {
     wrapperClass: String,
+    itemClass: String,
     items: {
       type: Array,
       default: () => [],
@@ -16,7 +17,7 @@ export default defineComponent({
 <template>
   <ul :class="wrapperClass">
     <template v-for="item in items" :key="item">
-      <li>{{ item }}</li>
+      <li :class="itemClass">{{ item }}</li>
     </template>
   </ul>
 </template>
