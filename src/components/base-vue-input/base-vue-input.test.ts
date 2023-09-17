@@ -45,4 +45,24 @@ describe.only('input component', () => {
       expect(wrapper.find('input').attributes('type')).toEqual(type);
     }
   });
+
+  // placeholder
+  test('should have default placeholder', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('placeholder')).toBeUndefined();
+    expect(wrapper.find('input').attributes('placeholder')).toBeUndefined();
+  });
+  test('should have placeholder from props', async () => {
+    const wrapper = mount(BaseVueInput, {
+      props: {
+        placeholder: 'Something',
+      },
+    });
+
+    expect(wrapper.props('placeholder')).toEqual('Something');
+    expect(wrapper.find('input').attributes('placeholder')).toEqual(
+      'Something',
+    );
+  });
 });

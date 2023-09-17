@@ -9,10 +9,11 @@ export default defineComponent({
       type: String,
       default: 'text',
     },
+    placeholder: String,
   },
 });
 </script>
 
 <template>
-  <input :type="type" :class="baseClass" />
+  <input :type="type" :class="baseClass" :placeholder="placeholder" />
 </template>
