@@ -14,5 +14,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div :class="wrapperClass"></div>
+  <ul :class="wrapperClass">
+    <template v-for="item in items" :key="item">
+      <li>{{ item }}</li>
+    </template>
+  </ul>
 </template>

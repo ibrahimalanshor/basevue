@@ -4,10 +4,10 @@ import BaseVueList from './base-vue-list.vue';
 
 describe.only('list component', () => {
   // element
-  test('should render div component', () => {
+  test('should render ul component', () => {
     const wrapper = mount(BaseVueList);
 
-    expect(wrapper.find('div').exists()).toBe(true);
+    expect(wrapper.find('ul').exists()).toBe(true);
   });
 
   // wrapper
@@ -32,5 +32,21 @@ describe.only('list component', () => {
     const wrapper = mount(BaseVueList);
 
     expect(wrapper.props('items')).toEqual([]);
+  });
+  test('should render item element from props', () => {
+    const items = ['item 1', 'item 2', 'item 3'];
+    const wrapper = mount(BaseVueList, {
+      props: {
+        items,
+      },
+    });
+
+    const wrapperItems = wrapper.findAll('li');
+
+    expect(wrapperItems).toHaveLength(items.length);
+
+    wrapperItems.forEach((item, index) => {
+      expect(item.text()).toEqual(items[index]);
+    });
   });
 });
