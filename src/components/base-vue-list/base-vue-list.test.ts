@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
 import { h } from 'vue';
 
-describe.only('list component', () => {
+describe('list component', () => {
   // element
   test('should render ul component', () => {
     const wrapper = mount(BaseVueList);
