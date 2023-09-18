@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueList from './base-vue-list.vue';
 import { h } from 'vue';
@@ -133,5 +133,45 @@ describe('list component', () => {
     });
 
     expect(wrapper.find('p').exists()).toBe(false);
+  });
+
+  // active
+  test('should have default active', () => {
+    const wrapper = mount(BaseVueList);
+
+    expect(wrapper.props('acticeClass')).toBeUndefined();
+    expect(wrapper.props('modelValue')).toBeUndefined();
+  });
+  test('should active item when modelvalue change', async () => {
+    const wrapper = mount(BaseVueList, {
+      props: {
+        items: ['item 1', 'item 2'],
+        activeClass: 'active',
+      },
+    });
+
+    expect(wrapper.find('li.active').exists()).toBe(false);
+
+    await wrapper.setProps({ modelValue: 'item 2' });
+
+    expect(wrapper.find('li.active').exists()).toBe(true);
+    expect(wrapper.find('li.active').text()).toBe('item 2');
+  });
+  test('should change modelvalue when item clicked', async () => {
+    const wrapper: VueWrapper = mount(BaseVueList, {
+      props: {
+        items: ['item 1', 'item 2'],
+        activeClass: 'active',
+        modelValue: 'item 2',
+        'onUpdate:modelvalue': (value) =>
+          wrapper.setProps({ modelValue: value }),
+      },
+    });
+
+    expect(wrapper.find('li').classes('active')).toBe(false);
+
+    await wrapper.find('li').trigger('click');
+
+    expect(wrapper.find('li.active').text()).toBe('item 1');
   });
 });
