@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils';
+import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueInput from './base-vue-input.vue';
 import { h } from 'vue';
 
-describe.only('input component', () => {
+describe('input component', () => {
   // element
   test('should render input element', () => {
     const wrapper = mount(BaseVueInput);
@@ -194,5 +194,31 @@ describe.only('input component', () => {
 
       expect(wrapper.find('input').classes(colors[color])).toBe(true);
     }
+  });
+
+  // model value
+  test('should have default value', () => {
+    const wrapper = mount(BaseVueInput);
+
+    expect(wrapper.props('modelValue')).toBeNull();
+    expect(wrapper.find('input').element.value).toEqual('');
+  });
+  test('should sync input value with model value', async () => {
+    const wrapper: VueWrapper = mount(BaseVueInput, {
+      props: {
+        modelValue: 'value',
+        'onUpdate:modelValue': (txt) => wrapper.setProps({ modelValue: txt }),
+      },
+    });
+
+    expect(wrapper.find('input').element.value).toEqual('value');
+
+    await wrapper.setProps({ modelValue: 'changed from props' });
+
+    expect(wrapper.find('input').element.value).toEqual('changed from props');
+
+    await wrapper.find('input').setValue('changed from input');
+
+    expect(wrapper.props('modelValue')).toEqual('changed from input');
   });
 });

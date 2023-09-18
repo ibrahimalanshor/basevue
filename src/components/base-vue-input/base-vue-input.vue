@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PropType, defineComponent } from 'vue';
+import { PropType, computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'BaseVueInput',
@@ -29,14 +29,27 @@ export default defineComponent({
         default: '',
       }),
     },
+    modelValue: {
+      type: null,
+      default: null,
+    },
   },
-  emits: ['clear'],
-  setup({}, { emit }) {
+  emits: ['clear', 'update:modelValue'],
+  setup(props, { emit }) {
+    const value = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit('update:modelValue', value);
+      },
+    });
+
     function handleClear() {
       emit('clear');
     }
 
-    return { handleClear };
+    return { value, handleClear };
   },
 });
 </script>
@@ -48,6 +61,7 @@ export default defineComponent({
       :class="[inputClass, colorClass[color]]"
       :placeholder="placeholder"
       :disabled="disabled"
+      v-model="value"
     />
     <slot name="right-content">
       <slot name="clear" :clear="handleClear" />
