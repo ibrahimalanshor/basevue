@@ -1,6 +1,5 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
-import { Weight } from './base-vue-title.interface';
 
 export default defineComponent({
   name: 'BaseVueTitle',
@@ -20,11 +19,8 @@ export default defineComponent({
     },
     centerClass: String,
     weightClass: {
-      type: Object as PropType<Record<Weight, string>>,
+      type: Object as PropType<Record<string, string>>,
       default: () => ({
-        normal: '',
-        medium: '',
-        semibold: '',
         bold: '',
       }),
     },
