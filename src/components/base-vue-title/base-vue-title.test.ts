@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueTitle from './base-vue-title.vue';
-import { Weight } from './base-vue-title.interface';
 
 describe('title component', () => {
   // element
@@ -124,9 +123,6 @@ describe('title component', () => {
     const wrapper = mount(BaseVueTitle);
 
     expect(wrapper.props('weightClass')).toEqual({
-      normal: '',
-      medium: '',
-      semibold: '',
       bold: '',
     });
   });
@@ -136,7 +132,7 @@ describe('title component', () => {
     expect(wrapper.props('weight')).toEqual('bold');
   });
   test('should render heading element with different weight from props', async () => {
-    const weightClass: Record<Weight, string> = {
+    const weightClass: Record<string, string> = {
       normal: 'font-normal',
       medium: 'font-medium',
       semibold: 'font-semibold',
@@ -147,7 +143,7 @@ describe('title component', () => {
         weightClass,
       },
     });
-    const weights: Weight[] = ['normal', 'medium', 'semibold', 'bold'];
+    const weights = ['normal', 'medium', 'semibold', 'bold'];
 
     for (const weight of weights) {
       await wrapper.setProps({ weight });
