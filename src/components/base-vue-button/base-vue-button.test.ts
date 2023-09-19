@@ -88,4 +88,34 @@ describe.only('button test', () => {
     expect(wrapper.props('loading')).toBe(true);
     expect(wrapper.find('.loading').exists()).toBe(true);
   });
+
+  // color
+  test('should have default color', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.props('color')).toEqual('default');
+    expect(wrapper.props('colorClass')).toEqual({ default: '' });
+  });
+  test('should have color class by color props', async () => {
+    const colors: Record<string, string> = {
+      success: 'border-green',
+      error: 'border-red',
+    };
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        colorClass: {
+          default: 'border-gray',
+          ...colors,
+        },
+      },
+    });
+
+    expect(wrapper.find('button').classes('border-gray')).toBe(true);
+
+    for (const color in colors) {
+      await wrapper.setProps({ color });
+
+      expect(wrapper.find('button').classes(colors[color])).toBe(true);
+    }
+  });
 });

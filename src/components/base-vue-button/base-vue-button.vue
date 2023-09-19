@@ -15,12 +15,22 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    color: {
+      type: String,
+      default: 'default',
+    },
+    colorClass: {
+      type: Object as PropType<Record<string | 'default', string>>,
+      default: () => ({
+        default: '',
+      }),
+    },
   },
 });
 </script>
 
 <template>
-  <button :type="type" :class="baseClass">
+  <button :type="type" :class="[baseClass, colorClass[color]]">
     <slot>{{ text }}</slot>
     <slot v-if="loading" name="loading" />
   </button>
