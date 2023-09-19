@@ -35,12 +35,32 @@ export default defineComponent({
         md: '',
       }),
     },
+    fullwidth: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    fullwidthClass: String,
+    loadingClass: String,
   },
 });
 </script>
 
 <template>
-  <button :type="type" :class="[baseClass, colorClass[color], sizeClass[size]]">
+  <button
+    :type="type"
+    :disabled="disabled"
+    :class="[
+      baseClass,
+      colorClass[color],
+      sizeClass[size],
+      fullwidth && fullwidthClass,
+      loading && loadingClass,
+    ]"
+  >
     <slot>{{ text }}</slot>
     <slot v-if="loading" name="loading" />
   </button>

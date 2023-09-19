@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import BaseVueButton from './base-vue-button.vue';
 import { h } from 'vue';
 
-describe.only('button test', () => {
+describe('button test', () => {
   // element
   test('should have button elment', () => {
     const wrapper = mount(BaseVueButton);
@@ -74,11 +74,13 @@ describe.only('button test', () => {
 
     expect(wrapper.props('loading')).toBe(false);
     expect(wrapper.find('.loading').exists()).toBe(false);
+    expect(wrapper.props('loadingClass')).toBeUndefined();
   });
   test('should render loading slot', () => {
     const wrapper = mount(BaseVueButton, {
       props: {
         loading: true,
+        loadingClass: 'bg-gray-50',
       },
       slots: {
         loading: () => h('span', { class: 'loading' }, 'loading'),
@@ -87,6 +89,7 @@ describe.only('button test', () => {
 
     expect(wrapper.props('loading')).toBe(true);
     expect(wrapper.find('.loading').exists()).toBe(true);
+    expect(wrapper.find('button').classes('bg-gray-50')).toBe(true);
   });
 
   // color
@@ -147,5 +150,42 @@ describe.only('button test', () => {
 
       expect(wrapper.find('button').classes(sizes[size])).toBe(true);
     }
+  });
+
+  // fullwidth
+  test('should have default fullwidth', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.props('fullwidth')).toBe(false);
+    expect(wrapper.props('fullwidthClass')).toBeUndefined();
+  });
+  test('should have fullwidth value', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        fullwidth: true,
+        fullwidthClass: 'w-full',
+      },
+    });
+
+    expect(wrapper.props('fullwidth')).toBe(true);
+    expect(wrapper.find('button').classes('w-full')).toBe(true);
+  });
+
+  // disabled
+  test('should have default disabled', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.props('disabled')).toBe(false);
+    expect(wrapper.find('button').element.disabled).toBe(false);
+  });
+  test('should have disabled value', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        disabled: true,
+      },
+    });
+
+    expect(wrapper.props('disabled')).toBe(true);
+    expect(wrapper.find('button').element.disabled).toBe(true);
   });
 });
