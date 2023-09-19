@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueButton from './base-vue-button.vue';
+import { h } from 'vue';
 
 describe.only('button test', () => {
   // element
@@ -61,5 +62,30 @@ describe.only('button test', () => {
     });
 
     expect(wrapper.find('button').attributes('type')).toEqual('submit');
+  });
+
+  // loading
+  test('should have default loading false', () => {
+    const wrapper = mount(BaseVueButton, {
+      slots: {
+        loading: () => h('span', { class: 'loading' }, 'loading'),
+      },
+    });
+
+    expect(wrapper.props('loading')).toBe(false);
+    expect(wrapper.find('.loading').exists()).toBe(false);
+  });
+  test('should render loading slot', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        loading: true,
+      },
+      slots: {
+        loading: () => h('span', { class: 'loading' }, 'loading'),
+      },
+    });
+
+    expect(wrapper.props('loading')).toBe(true);
+    expect(wrapper.find('.loading').exists()).toBe(true);
   });
 });

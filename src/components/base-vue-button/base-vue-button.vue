@@ -11,6 +11,10 @@ export default defineComponent({
       in: ['button', 'submit', 'reset'],
       default: 'button',
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
@@ -18,5 +22,6 @@ export default defineComponent({
 <template>
   <button :type="type" :class="baseClass">
     <slot>{{ text }}</slot>
+    <slot v-if="loading" name="loading" />
   </button>
 </template>
