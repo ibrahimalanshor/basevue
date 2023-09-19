@@ -3,9 +3,14 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'BaseVueButton',
+  props: {
+    text: String,
+  },
 });
 </script>
 
 <template>
-  <button></button>
+  <button>
+    <slot>{{ text }}</slot>
+  </button>
 </template>

@@ -9,4 +9,24 @@ describe.only('button test', () => {
 
     expect(wrapper.find('button').exists()).toBe(true);
   });
+
+  // text
+  test('should render text from slot', () => {
+    const wrapper = mount(BaseVueButton, {
+      slots: {
+        default: 'Something',
+      },
+    });
+
+    expect(wrapper.text()).toEqual('Something');
+  });
+  test('should render text from porps', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        text: 'Something',
+      },
+    });
+
+    expect(wrapper.text()).toEqual('Something');
+  });
 });
