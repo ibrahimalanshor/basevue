@@ -118,4 +118,34 @@ describe.only('button test', () => {
       expect(wrapper.find('button').classes(colors[color])).toBe(true);
     }
   });
+
+  // size
+  test('should have default size', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.props('size')).toEqual('md');
+    expect(wrapper.props('sizeClass')).toEqual({ md: '' });
+  });
+  test('should have size class by size props', async () => {
+    const sizes: Record<string, string> = {
+      lg: 'p-4',
+      sm: 'p-2',
+    };
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        sizeClass: {
+          md: 'p-6',
+          ...sizes,
+        },
+      },
+    });
+
+    expect(wrapper.find('button').classes('p-6')).toBe(true);
+
+    for (const size in sizes) {
+      await wrapper.setProps({ size });
+
+      expect(wrapper.find('button').classes(sizes[size])).toBe(true);
+    }
+  });
 });

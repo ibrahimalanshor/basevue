@@ -25,12 +25,22 @@ export default defineComponent({
         default: '',
       }),
     },
+    size: {
+      type: String,
+      default: 'md',
+    },
+    sizeClass: {
+      type: Object as PropType<Record<string | 'md', string>>,
+      default: () => ({
+        md: '',
+      }),
+    },
   },
 });
 </script>
 
 <template>
-  <button :type="type" :class="[baseClass, colorClass[color]]">
+  <button :type="type" :class="[baseClass, colorClass[color], sizeClass[size]]">
     <slot>{{ text }}</slot>
     <slot v-if="loading" name="loading" />
   </button>
