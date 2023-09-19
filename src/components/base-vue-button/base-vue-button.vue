@@ -5,12 +5,13 @@ export default defineComponent({
   name: 'BaseVueButton',
   props: {
     text: String,
+    baseClass: String,
   },
 });
 </script>
 
 <template>
-  <button>
+  <button :class="baseClass">
     <slot>{{ text }}</slot>
   </button>
 </template>

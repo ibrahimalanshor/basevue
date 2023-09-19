@@ -29,4 +29,21 @@ describe.only('button test', () => {
 
     expect(wrapper.text()).toEqual('Something');
   });
+
+  // base
+  test('should have default base class', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.props('baseClass')).toBeUndefined();
+  });
+  test('should have default base class', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        baseClass: 'p-4 block',
+      },
+    });
+
+    expect(wrapper.classes('p-4')).toBe(true);
+    expect(wrapper.classes('block')).toBe(true);
+  });
 });
