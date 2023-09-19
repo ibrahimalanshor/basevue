@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueChekbox from './base-vue-checkbox.vue';
 
@@ -35,7 +35,10 @@ describe.only('checkbox test', () => {
     const wrapper = mount(BaseVueChekbox);
     const checkbox = wrapper.find('input[type=checkbox]');
 
-    expect(checkbox.attributes('checked')).toBeUndefined();
+    expect(
+      (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
+        .checked,
+    ).toBe(false);
   });
   test('should have default checkbox class', () => {
     const wrapper = mount(BaseVueChekbox);
@@ -90,9 +93,67 @@ describe.only('checkbox test', () => {
 
   //   await wrapper.find('label').trigger('click')
 
-  //   console.log(wrapper.find('input[type=checkbox]').attributes())
-  //   console.log(wrapper.find('input[type=checkbox]').element.attributes)
-
-  //   expect(wrapper.find('input[type=checkbox]').attributes('checked')).toBe(true)
+  //   expect((wrapper.find('input[type=checkbox]').element as HTMLInputElement).checked).toBe(true)
   // })
+
+  // value
+  test('should default checked false', () => {
+    const wrapper = mount(BaseVueChekbox);
+
+    expect(wrapper.props('modelValue')).toBeUndefined();
+  });
+  test('should checked from props', async () => {
+    const wrapper = mount(BaseVueChekbox, {
+      props: {
+        modelValue: true,
+      },
+    });
+
+    expect(
+      (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
+        .checked,
+    ).toBe(true);
+
+    await wrapper.setProps({ modelValue: false });
+
+    expect(
+      (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
+        .checked,
+    ).toBe(false);
+  });
+  test('should update props when checked', async () => {
+    const wrapper: VueWrapper = mount(BaseVueChekbox, {
+      props: {
+        modelValue: false,
+        'onUpdate:modelValue': (value) =>
+          wrapper.setProps({ modelValue: value }),
+      },
+    });
+
+    expect(
+      (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
+        .checked,
+    ).toBe(false);
+
+    await wrapper.find('input[type=checkbox]').setValue(true);
+
+    expect(wrapper.props('modelValue')).toBe(true);
+    expect(
+      (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
+        .checked,
+    ).toBe(true);
+  });
+  test('should emit change event on click checkbox', async () => {
+    const wrapper: VueWrapper = mount(BaseVueChekbox, {
+      props: {
+        modelValue: false,
+        'onUpdate:modelValue': (value) =>
+          wrapper.setProps({ modelValue: value }),
+      },
+    });
+
+    await wrapper.find('input[type=checkbox]').setValue(true);
+
+    expect(wrapper.emitted().change).toBeDefined();
+  });
 });
