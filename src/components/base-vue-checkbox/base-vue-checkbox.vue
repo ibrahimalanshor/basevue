@@ -10,6 +10,7 @@ export default defineComponent({
     label: String,
     id: String,
     modelValue: null,
+    value: null,
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
@@ -22,7 +23,7 @@ export default defineComponent({
       },
     });
 
-    function handleChange(e) {
+    function handleChange(e: Event) {
       emit('change', e);
     }
 
@@ -37,6 +38,7 @@ export default defineComponent({
       :id="id"
       type="checkbox"
       :class="checkboxClass"
+      :value="value"
       v-model="checked"
       v-on:change="handleChange"
     />

@@ -33,7 +33,6 @@ describe.only('checkbox test', () => {
   });
   test('should have unchecked default', () => {
     const wrapper = mount(BaseVueChekbox);
-    const checkbox = wrapper.find('input[type=checkbox]');
 
     expect(
       (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
@@ -84,17 +83,6 @@ describe.only('checkbox test', () => {
     expect(wrapper.find('label').classes('font-bold')).toBe(true);
     expect(wrapper.find('label').classes('text-sm')).toBe(true);
   });
-  // test('should check checkbox when label clicked', async () => {
-  //   const wrapper = mount(BaseVueChekbox, {
-  //     props: {
-  //       id: 'select'
-  //     },
-  //   });
-
-  //   await wrapper.find('label').trigger('click')
-
-  //   expect((wrapper.find('input[type=checkbox]').element as HTMLInputElement).checked).toBe(true)
-  // })
 
   // value
   test('should default checked false', () => {
@@ -155,5 +143,27 @@ describe.only('checkbox test', () => {
     await wrapper.find('input[type=checkbox]').setValue(true);
 
     expect(wrapper.emitted().change).toBeDefined();
+  });
+
+  // as array element value
+  test('should have default value', () => {
+    const wrapper = mount(BaseVueChekbox);
+
+    expect(wrapper.props('value')).toBeUndefined();
+    expect(
+      wrapper.find('input[type=checkbox]').attributes('value'),
+    ).toBeUndefined();
+  });
+  test('should have value', () => {
+    const wrapper = mount(BaseVueChekbox, {
+      props: {
+        value: 'test',
+      },
+    });
+
+    expect(wrapper.props('value')).toEqual('test');
+    expect(wrapper.find('input[type=checkbox]').attributes('value')).toEqual(
+      'test',
+    );
   });
 });
