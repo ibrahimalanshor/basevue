@@ -2,7 +2,7 @@
 import { PropType, computed, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'BaseVueInput',
+  name: 'PlainVueInput',
   props: {
     wrapperClass: String,
     inputClass: String,

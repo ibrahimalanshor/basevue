@@ -1,18 +1,18 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import BaseVueTitle from './base-vue-title.vue';
+import PlainVueTitle from './plain-vue-title.vue';
 
 describe('title component', () => {
   // element
   test('should render heading element', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.find('h1').exists()).toBe(true);
   });
 
   // text
   test('should render text default slot', () => {
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       slots: {
         default: 'Something',
       },
@@ -21,12 +21,12 @@ describe('title component', () => {
     expect(wrapper.text()).toEqual('Something');
   });
   test('should have default text props to undefined', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('text')).toBeUndefined();
   });
   test('should render text from text props', () => {
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       props: {
         text: 'Something',
       },
@@ -37,12 +37,12 @@ describe('title component', () => {
 
   // base
   test('should have default base classes', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('baseClass')).toBeUndefined();
   });
   test('should have base class from props', () => {
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       props: {
         baseClass: 'font-bold text-lg',
       },
@@ -54,7 +54,7 @@ describe('title component', () => {
 
   // level
   test('should have default level classes', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('levelClass')).toEqual({
       1: '',
@@ -66,7 +66,7 @@ describe('title component', () => {
     });
   });
   test('should have default level props to 1', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('level')).toEqual(1);
   });
@@ -79,7 +79,7 @@ describe('title component', () => {
       5: 'text-xl',
       6: 'text-lg',
     };
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       props: {
         levelClass,
       },
@@ -98,17 +98,17 @@ describe('title component', () => {
 
   // center
   test('should have default center classes', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('centerClass')).toBeUndefined();
   });
   test('should have default center props to false', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('center')).toBe(false);
   });
   test('should have center class if center props is true', () => {
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       props: {
         center: true,
         centerClass: 'text-center',
@@ -120,14 +120,14 @@ describe('title component', () => {
 
   // weight
   test('should have default classes', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('weightClass')).toEqual({
       bold: '',
     });
   });
   test('should have default weight props to bold', () => {
-    const wrapper = mount(BaseVueTitle);
+    const wrapper = mount(PlainVueTitle);
 
     expect(wrapper.props('weight')).toEqual('bold');
   });
@@ -138,7 +138,7 @@ describe('title component', () => {
       semibold: 'font-semibold',
       bold: 'font-bold',
     };
-    const wrapper = mount(BaseVueTitle, {
+    const wrapper = mount(PlainVueTitle, {
       props: {
         weightClass,
       },

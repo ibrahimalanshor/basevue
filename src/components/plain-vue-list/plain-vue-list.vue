@@ -1,9 +1,9 @@
 <script lang="ts">
 import { PropType, computed, defineComponent } from 'vue';
-import { ListItem } from './base-vue-list.interface';
+import { ListItem } from './plain-vue-list.interface';
 
 export default defineComponent({
-  name: 'BaseVueList',
+  name: 'PlainVueList',
   props: {
     wrapperClass: String,
     itemClass: String,

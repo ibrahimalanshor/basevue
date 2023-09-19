@@ -13,8 +13,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'BaseVue',
-      fileName: 'base-vue',
+      name: 'PlainVue',
+      fileName: 'plain-vue',
     },
     rollupOptions: {
       external: ['vue'],

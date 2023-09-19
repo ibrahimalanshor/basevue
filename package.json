@@ -1,14 +1,14 @@
 {
-  "name": "base-vue",
+  "name": "plain-vue",
   "version": "1.0.0",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/base-vue.umd.cjs",
-  "module": "./dist/base-vue.js",
+  "main": "./dist/plain-vue.umd.cjs",
+  "module": "./dist/plain-vue.js",
   "exports": {
     ".": {
-      "import": "./dist/base-vue.js",
-      "require": "./dist/base-vue.umd.cjs"
+      "import": "./dist/plain-vue.js",
+      "require": "./dist/plain-vue.umd.cjs"
     }
   },
   "scripts": {

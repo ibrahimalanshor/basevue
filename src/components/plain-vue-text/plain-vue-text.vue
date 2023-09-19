@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'BaseVueText',
+  name: 'PlainVueText',
   props: {
     text: String,
     baseClass: String,
