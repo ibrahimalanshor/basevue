@@ -2,7 +2,7 @@
 import { PropType, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'BaseVueButton',
+  name: 'PlainVueButton',
   props: {
     text: String,
     baseClass: String,

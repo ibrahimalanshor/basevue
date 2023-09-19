@@ -1,19 +1,19 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import BaseVueButton from './base-vue-button.vue';
+import PlainVueButton from './plain-vue-button.vue';
 import { h } from 'vue';
 
 describe('button test', () => {
   // element
   test('should have button elment', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.find('button').exists()).toBe(true);
   });
 
   // text
   test('should render text from slot', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       slots: {
         default: 'Something',
       },
@@ -22,7 +22,7 @@ describe('button test', () => {
     expect(wrapper.text()).toEqual('Something');
   });
   test('should render text from porps', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         text: 'Something',
       },
@@ -33,12 +33,12 @@ describe('button test', () => {
 
   // base
   test('should have default base class', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.props('baseClass')).toBeUndefined();
   });
   test('should have default base class', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         baseClass: 'p-4 block',
       },
@@ -50,12 +50,12 @@ describe('button test', () => {
 
   // type
   test('should have default type', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.find('button').attributes('type')).toEqual('button');
   });
   test('should have type from props', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         type: 'submit',
       },
@@ -66,7 +66,7 @@ describe('button test', () => {
 
   // loading
   test('should have default loading false', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       slots: {
         loading: () => h('span', { class: 'loading' }, 'loading'),
       },
@@ -77,7 +77,7 @@ describe('button test', () => {
     expect(wrapper.props('loadingClass')).toBeUndefined();
   });
   test('should render loading slot', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         loading: true,
         loadingClass: 'bg-gray-50',
@@ -94,7 +94,7 @@ describe('button test', () => {
 
   // color
   test('should have default color', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.props('color')).toEqual('default');
     expect(wrapper.props('colorClass')).toEqual({ default: '' });
@@ -104,7 +104,7 @@ describe('button test', () => {
       success: 'border-green',
       error: 'border-red',
     };
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         colorClass: {
           default: 'border-gray',
@@ -124,7 +124,7 @@ describe('button test', () => {
 
   // size
   test('should have default size', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.props('size')).toEqual('md');
     expect(wrapper.props('sizeClass')).toEqual({ md: '' });
@@ -134,7 +134,7 @@ describe('button test', () => {
       lg: 'p-4',
       sm: 'p-2',
     };
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         sizeClass: {
           md: 'p-6',
@@ -154,13 +154,13 @@ describe('button test', () => {
 
   // fullwidth
   test('should have default fullwidth', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.props('fullwidth')).toBe(false);
     expect(wrapper.props('fullwidthClass')).toBeUndefined();
   });
   test('should have fullwidth value', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         fullwidth: true,
         fullwidthClass: 'w-full',
@@ -173,13 +173,13 @@ describe('button test', () => {
 
   // disabled
   test('should have default disabled', () => {
-    const wrapper = mount(BaseVueButton);
+    const wrapper = mount(PlainVueButton);
 
     expect(wrapper.props('disabled')).toBe(false);
     expect(wrapper.find('button').element.disabled).toBe(false);
   });
   test('should have disabled value', () => {
-    const wrapper = mount(BaseVueButton, {
+    const wrapper = mount(PlainVueButton, {
       props: {
         disabled: true,
       },

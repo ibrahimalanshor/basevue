@@ -1,24 +1,24 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import BaseVueList from './base-vue-list.vue';
+import PlainVueList from './plain-vue-list.vue';
 import { h } from 'vue';
 
 describe('list component', () => {
   // element
   test('should render ul component', () => {
-    const wrapper = mount(BaseVueList);
+    const wrapper = mount(PlainVueList);
 
     expect(wrapper.find('ul').exists()).toBe(true);
   });
 
   // wrapper
   test('should have default wrapper class', () => {
-    const wrapper = mount(BaseVueList);
+    const wrapper = mount(PlainVueList);
 
     expect(wrapper.props('wrapperClass')).toBeUndefined();
   });
   test('should have wrapper class', () => {
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         wrapperClass: 'p-4 space-y-2',
       },
@@ -30,13 +30,13 @@ describe('list component', () => {
 
   // items
   test('should have default items', () => {
-    const wrapper = mount(BaseVueList);
+    const wrapper = mount(PlainVueList);
 
     expect(wrapper.props('items')).toEqual([]);
   });
   test('should render item', () => {
     const items = ['item 1', 'item 2', 'item 3'];
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         items,
       },
@@ -53,7 +53,7 @@ describe('list component', () => {
       { id: 2, name: 'item 2' },
       { id: 3, name: 'item 3' },
     ];
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         items,
       },
@@ -67,12 +67,12 @@ describe('list component', () => {
     );
   });
   test('should have default item class', () => {
-    const wrapper = mount(BaseVueList);
+    const wrapper = mount(PlainVueList);
 
     expect(wrapper.props('itemClass')).toBeUndefined();
   });
   test('should have default item class', () => {
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         items: ['item'],
         itemClass: 'p-4',
@@ -85,7 +85,7 @@ describe('list component', () => {
   // event
   test('should emit on click event with item detail', async () => {
     const items = ['item 1', 'item 2'];
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         items,
       },
@@ -104,7 +104,7 @@ describe('list component', () => {
   // item slot
   test('should render item using item slot', () => {
     const items = ['item 1', 'item 2'];
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: { items },
       slots: {
         item: (props: { item: string }) => h('a', { href: '#' }, props.item),
@@ -119,7 +119,7 @@ describe('list component', () => {
 
   // empty
   test('should render empty slot when item empty', async () => {
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       slots: {
         empty: () => h('p', 'Empty'),
       },
@@ -137,13 +137,13 @@ describe('list component', () => {
 
   // active
   test('should have default active', () => {
-    const wrapper = mount(BaseVueList);
+    const wrapper = mount(PlainVueList);
 
     expect(wrapper.props('acticeClass')).toBeUndefined();
     expect(wrapper.props('modelValue')).toBeUndefined();
   });
   test('should active item when modelvalue change', async () => {
-    const wrapper = mount(BaseVueList, {
+    const wrapper = mount(PlainVueList, {
       props: {
         items: ['item 1', 'item 2'],
         activeClass: 'active',
@@ -158,7 +158,7 @@ describe('list component', () => {
     expect(wrapper.find('li.active').text()).toBe('item 2');
   });
   test('should change modelvalue when item clicked', async () => {
-    const wrapper: VueWrapper = mount(BaseVueList, {
+    const wrapper: VueWrapper = mount(PlainVueList, {
       props: {
         items: ['item 1', 'item 2'],
         activeClass: 'active',

@@ -1,12 +1,12 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import BaseVueInput from './base-vue-input.vue';
+import PlainVueInput from './plain-vue-input.vue';
 import { h } from 'vue';
 
 describe('input component', () => {
   // element
   test('should render input element', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.find('div').exists()).toBe(true);
     expect(wrapper.find('input').exists()).toBe(true);
@@ -14,12 +14,12 @@ describe('input component', () => {
 
   // wrapper class
   test('should have default wrapper class', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('wrapper')).toBeUndefined();
   });
   test('should have wrapper class from props', () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         wrapperClass: 'space-y-2 relative',
       },
@@ -31,12 +31,12 @@ describe('input component', () => {
 
   // input class
   test('should have default input class', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('inputClass')).toBeUndefined();
   });
   test('should have input class from props', () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         inputClass: 'p-4 border',
       },
@@ -48,14 +48,14 @@ describe('input component', () => {
 
   // type
   test('should have default type', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('type')).toEqual('text');
     expect(wrapper.find('input').attributes('type')).toEqual('text');
   });
   test('should have type from props', async () => {
     const types = ['email', 'password'];
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     for (const type of types) {
       await wrapper.setProps({ type });
@@ -67,13 +67,13 @@ describe('input component', () => {
 
   // placeholder
   test('should have default placeholder', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('placeholder')).toBeUndefined();
     expect(wrapper.find('input').attributes('placeholder')).toBeUndefined();
   });
   test('should have placeholder from props', async () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         placeholder: 'Something',
       },
@@ -87,13 +87,13 @@ describe('input component', () => {
 
   // disabled
   test('should have default disabled', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('disabled')).toBe(false);
     expect(wrapper.find('input').attributes('disabled')).toBeUndefined();
   });
   test('should have disabled from props', async () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         disabled: true,
       },
@@ -105,7 +105,7 @@ describe('input component', () => {
 
   // clear
   test('should render clear slot', () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       slots: {
         clear: () => h('button', 'clear'),
       },
@@ -114,7 +114,7 @@ describe('input component', () => {
     expect(wrapper.find('button').exists()).toBe(true);
   });
   test('should emit clear when cleared', async () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       slots: {
         clear: ({ clear }) => h('button', { onClick: clear }, 'clear'),
       },
@@ -129,13 +129,13 @@ describe('input component', () => {
 
   // loading
   test('should have default loading', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('loading')).toBe(false);
     expect(wrapper.find('button.loading').exists()).toBe(false);
   });
   test('should render loading slot', () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         loading: true,
       },
@@ -150,7 +150,7 @@ describe('input component', () => {
 
   // right content
   test('should render right content', () => {
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         loading: true,
       },
@@ -168,7 +168,7 @@ describe('input component', () => {
 
   // color
   test('should have default color', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('color')).toEqual('default');
     expect(wrapper.props('colorClass')).toEqual({ default: '' });
@@ -178,7 +178,7 @@ describe('input component', () => {
       success: 'border-green',
       error: 'border-red',
     };
-    const wrapper = mount(BaseVueInput, {
+    const wrapper = mount(PlainVueInput, {
       props: {
         colorClass: {
           default: 'border-gray',
@@ -198,13 +198,13 @@ describe('input component', () => {
 
   // model value
   test('should have default value', () => {
-    const wrapper = mount(BaseVueInput);
+    const wrapper = mount(PlainVueInput);
 
     expect(wrapper.props('modelValue')).toBeNull();
     expect(wrapper.find('input').element.value).toEqual('');
   });
   test('should sync input value with model value', async () => {
-    const wrapper: VueWrapper = mount(BaseVueInput, {
+    const wrapper: VueWrapper = mount(PlainVueInput, {
       props: {
         modelValue: 'value',
         'onUpdate:modelValue': (txt) => wrapper.setProps({ modelValue: txt }),

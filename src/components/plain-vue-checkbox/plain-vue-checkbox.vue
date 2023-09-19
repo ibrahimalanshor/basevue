@@ -2,7 +2,7 @@
 import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'BaseVueCheckbox',
+  name: 'PlainVueCheckbox',
   props: {
     wrapperClass: String,
     checkboxClass: String,

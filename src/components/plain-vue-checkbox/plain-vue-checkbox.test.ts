@@ -1,21 +1,21 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import BaseVueChekbox from './base-vue-checkbox.vue';
+import PlainVueChekbox from './plain-vue-checkbox.vue';
 
 describe('checkbox test', () => {
   // wrapper
   test('should have wrapper element', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.find('div').exists()).toBe(true);
   });
   test('should have default wrapper class', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.props('wrapperClass')).toBeUndefined();
   });
   test('should have wrapper class', () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         wrapperClass: 'flex relative',
       },
@@ -27,12 +27,12 @@ describe('checkbox test', () => {
 
   // checkbox
   test('should have checkbox element', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.find('input[type=checkbox]').exists()).toBe(true);
   });
   test('should have unchecked default', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(
       (wrapper.find('input[type=checkbox]').element as HTMLInputElement)
@@ -40,12 +40,12 @@ describe('checkbox test', () => {
     ).toBe(false);
   });
   test('should have default checkbox class', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.props('checkboxClass')).toBeUndefined();
   });
   test('should have checkbox class', () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         checkboxClass: 'h-4 border',
       },
@@ -57,7 +57,7 @@ describe('checkbox test', () => {
 
   // label
   test('should have label element', () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         id: 'select',
         label: 'Select',
@@ -69,12 +69,12 @@ describe('checkbox test', () => {
     expect(wrapper.find('label').attributes('for')).toEqual('select');
   });
   test('should have default label class', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.props('labelClass')).toBeUndefined();
   });
   test('should have label class', () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         labelClass: 'font-bold text-sm',
       },
@@ -86,12 +86,12 @@ describe('checkbox test', () => {
 
   // value
   test('should default checked false', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.props('modelValue')).toBeUndefined();
   });
   test('should checked from props', async () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         modelValue: true,
       },
@@ -110,7 +110,7 @@ describe('checkbox test', () => {
     ).toBe(false);
   });
   test('should update props when checked', async () => {
-    const wrapper: VueWrapper = mount(BaseVueChekbox, {
+    const wrapper: VueWrapper = mount(PlainVueChekbox, {
       props: {
         modelValue: false,
         'onUpdate:modelValue': (value) =>
@@ -132,7 +132,7 @@ describe('checkbox test', () => {
     ).toBe(true);
   });
   test('should emit change event on click checkbox', async () => {
-    const wrapper: VueWrapper = mount(BaseVueChekbox, {
+    const wrapper: VueWrapper = mount(PlainVueChekbox, {
       props: {
         modelValue: false,
         'onUpdate:modelValue': (value) =>
@@ -147,7 +147,7 @@ describe('checkbox test', () => {
 
   // as array element value
   test('should have default value', () => {
-    const wrapper = mount(BaseVueChekbox);
+    const wrapper = mount(PlainVueChekbox);
 
     expect(wrapper.props('value')).toBeUndefined();
     expect(
@@ -155,7 +155,7 @@ describe('checkbox test', () => {
     ).toBeUndefined();
   });
   test('should have value', () => {
-    const wrapper = mount(BaseVueChekbox, {
+    const wrapper = mount(PlainVueChekbox, {
       props: {
         value: 'test',
       },
