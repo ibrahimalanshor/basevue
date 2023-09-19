@@ -46,4 +46,20 @@ describe.only('button test', () => {
     expect(wrapper.classes('p-4')).toBe(true);
     expect(wrapper.classes('block')).toBe(true);
   });
+
+  // type
+  test('should have default type', () => {
+    const wrapper = mount(BaseVueButton);
+
+    expect(wrapper.find('button').attributes('type')).toEqual('button');
+  });
+  test('should have type from props', () => {
+    const wrapper = mount(BaseVueButton, {
+      props: {
+        type: 'submit',
+      },
+    });
+
+    expect(wrapper.find('button').attributes('type')).toEqual('submit');
+  });
 });
