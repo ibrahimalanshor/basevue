@@ -2,7 +2,7 @@ import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import BaseVueChekbox from './base-vue-checkbox.vue';
 
-describe.only('checkbox test', () => {
+describe('checkbox test', () => {
   // wrapper
   test('should have wrapper element', () => {
     const wrapper = mount(BaseVueChekbox);
