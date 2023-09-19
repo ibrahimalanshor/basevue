@@ -1,8 +1,16 @@
 {
-  "name": "basevue",
-  "private": true,
-  "version": "0.0.0",
+  "name": "base-vue",
+  "version": "1.0.0",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/base-vue.umd.cjs",
+  "module": "./dist/base-vue.js",
+  "exports": {
+    ".": {
+      "import": "./dist/base-vue.js",
+      "require": "./dist/base-vue.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
