@@ -8,20 +8,21 @@ export default defineComponent({
     wrapperClass: String,
     itemClass: String,
     activeClass: String,
+    inactiveClass: String,
     items: {
       type: Array as PropType<string[] | ListItem[]>,
       default: () => [],
     },
     modelValue: null,
   },
-  emits: ['click-item', 'update:modelvalue'],
+  emits: ['click-item', 'update:modelValue'],
   setup(props, { emit }) {
     const active = computed({
       get() {
         return props.modelValue;
       },
       set(value) {
-        emit('update:modelvalue', value);
+        emit('update:modelValue', value);
       },
     });
 
@@ -49,7 +50,10 @@ export default defineComponent({
     >
       <slot name="item" :item="item">
         <li
-          :class="[itemClass, checkIsActive(item) && activeClass]"
+          :class="[
+            itemClass,
+            checkIsActive(item) ? activeClass : inactiveClass,
+          ]"
           v-on:click="handleClickItem(item)"
         >
           {{ typeof item === 'object' ? item.name : item }}
