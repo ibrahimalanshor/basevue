@@ -1,8 +1,10 @@
 {
   "name": "plain-vue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/plain-vue.umd.cjs",
   "module": "./dist/plain-vue.js",
   "exports": {
