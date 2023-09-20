@@ -14,14 +14,14 @@ export default defineComponent({
     },
     modelValue: null,
   },
-  emits: ['click-item', 'update:modelvalue'],
+  emits: ['click-item', 'update:modelValue'],
   setup(props, { emit }) {
     const active = computed({
       get() {
         return props.modelValue;
       },
       set(value) {
-        emit('update:modelvalue', value);
+        emit('update:modelValue', value);
       },
     });
 

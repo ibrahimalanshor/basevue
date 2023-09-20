@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import PlainVueList from './plain-vue-list.vue';
 import { h } from 'vue';
 
-describe('list component', () => {
+describe.only('list component', () => {
   // element
   test('should render ul component', () => {
     const wrapper = mount(PlainVueList);
@@ -163,7 +163,7 @@ describe('list component', () => {
         items: ['item 1', 'item 2'],
         activeClass: 'active',
         modelValue: 'item 2',
-        'onUpdate:modelvalue': (value) =>
+        'onUpdate:modelValue': (value) =>
           wrapper.setProps({ modelValue: value }),
       },
     });
