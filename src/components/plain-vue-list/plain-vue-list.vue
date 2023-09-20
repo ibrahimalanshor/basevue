@@ -8,6 +8,7 @@ export default defineComponent({
     wrapperClass: String,
     itemClass: String,
     activeClass: String,
+    inactiveClass: String,
     items: {
       type: Array as PropType<string[] | ListItem[]>,
       default: () => [],
@@ -49,7 +50,10 @@ export default defineComponent({
     >
       <slot name="item" :item="item">
         <li
-          :class="[itemClass, checkIsActive(item) && activeClass]"
+          :class="[
+            itemClass,
+            checkIsActive(item) ? activeClass : inactiveClass,
+          ]"
           v-on:click="handleClickItem(item)"
         >
           {{ typeof item === 'object' ? item.name : item }}
