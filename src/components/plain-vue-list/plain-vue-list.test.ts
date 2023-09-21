@@ -180,4 +180,15 @@ describe('list component', () => {
 
     expect(wrapper.find('li.active').text()).toBe('item 1');
   });
+
+  // append item
+  test('should render append item slot', () => {
+    const wrapper = mount(PlainVueList, {
+      slots: {
+        'append-item': () => h('span', { class: 'append-item' }, 'Append Item'),
+      },
+    });
+
+    expect(wrapper.find('.append-item').exists()).toBe(true);
+  });
 });
