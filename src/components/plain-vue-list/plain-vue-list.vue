@@ -44,22 +44,24 @@ export default defineComponent({
 <template>
   <ul :class="wrapperClass">
     <slot v-if="!items.length" name="empty" />
-    <template
-      v-for="item in items"
-      :key="typeof item === 'object' ? item.id : item"
-    >
-      <slot name="item" :item="item">
-        <li
-          :class="[
-            itemClass,
-            checkIsActive(item) ? activeClass : inactiveClass,
-          ]"
-          v-on:click="handleClickItem(item)"
-        >
-          {{ typeof item === 'object' ? item.name : item }}
-        </li>
-      </slot>
-    </template>
+    <slot name="list">
+      <template
+        v-for="item in items"
+        :key="typeof item === 'object' ? item.id : item"
+      >
+        <slot name="item" :item="item">
+          <li
+            :class="[
+              itemClass,
+              checkIsActive(item) ? activeClass : inactiveClass,
+            ]"
+            v-on:click="handleClickItem(item)"
+          >
+            {{ typeof item === 'object' ? item.name : item }}
+          </li>
+        </slot>
+      </template>
+    </slot>
     <slot name="append-item" />
   </ul>
 </template>
