@@ -191,4 +191,19 @@ describe('list component', () => {
 
     expect(wrapper.find('.append-item').exists()).toBe(true);
   });
+
+  // list slot
+  test('should render list and not render item', () => {
+    const wrapper = mount(PlainVueList, {
+      props: {
+        items: ['item 1', 'item 2'],
+      },
+      slots: {
+        list: () => h('div', { class: 'bg-red-100' }, 'list'),
+      },
+    });
+
+    expect(wrapper.find('div.bg-red-100').exists()).toBe(true);
+    expect(wrapper.findAll('li')).toHaveLength(0);
+  });
 });
