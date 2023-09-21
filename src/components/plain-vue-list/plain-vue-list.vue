@@ -60,5 +60,6 @@ export default defineComponent({
         </li>
       </slot>
     </template>
+    <slot name="append-item" />
   </ul>
 </template>
