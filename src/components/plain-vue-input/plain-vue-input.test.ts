@@ -221,4 +221,11 @@ describe('input component', () => {
 
     expect(wrapper.props('modelValue')).toEqual('changed from input');
   });
+
+  // expose ref
+  test('should expose input ref element', () => {
+    const wrapper = mount(PlainVueInput);
+
+    expect(wrapper.find({ ref: 'input' }).exists()).toBe(true);
+  });
 });

@@ -57,6 +57,7 @@ export default defineComponent({
 <template>
   <div :class="wrapperClass">
     <input
+      ref="input"
       :type="type"
       :class="[inputClass, colorClass[color]]"
       :placeholder="placeholder"
