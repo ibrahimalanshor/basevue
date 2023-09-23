@@ -81,4 +81,22 @@ describe('text component', () => {
       expect(wrapper.find('p').classes(colors[color])).toBe(true);
     }
   });
+
+  // custom tag
+  test('should have default tag', () => {
+    const wrapper = mount(PlainVueText);
+
+    expect(wrapper.props('tag')).toEqual('p');
+    expect(wrapper.find('p').exists()).toBe(true);
+  });
+  test('should render custom tag', () => {
+    const wrapper = mount(PlainVueText, {
+      props: {
+        tag: 'h1',
+      },
+    });
+
+    expect(wrapper.props('tag')).toEqual('h1');
+    expect(wrapper.find('h1').exists()).toBe(true);
+  });
 });

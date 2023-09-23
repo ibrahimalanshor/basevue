@@ -16,12 +16,16 @@ export default defineComponent({
         gray: '',
       }),
     },
+    tag: {
+      type: String,
+      default: 'p',
+    },
   },
 });
 </script>
 
 <template>
-  <p :class="[baseClass, colorClass[color]]">
+  <component :is="tag" :class="[baseClass, colorClass[color]]">
     <slot>{{ text }}</slot>
-  </p>
+  </component>
 </template>
