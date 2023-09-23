@@ -228,4 +228,15 @@ describe('input component', () => {
 
     expect(wrapper.find({ ref: 'input' }).exists()).toBe(true);
   });
+
+  // focus event
+  test('should emit focus and outfocus', async () => {
+    const wrapper = mount(PlainVueInput);
+
+    await wrapper.find('input').trigger('focus');
+    await wrapper.find('input').trigger('focusout');
+
+    expect(wrapper.emitted()).toHaveProperty('focus');
+    expect(wrapper.emitted()).toHaveProperty('focusout');
+  });
 });
