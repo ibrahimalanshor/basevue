@@ -1,16 +1,29 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'PlainVueDropdown',
   props: {
     wrapperClass: String,
+    contentClass: String,
+  },
+  setup() {
+    const visible = ref(false);
+
+    function handleToggle() {
+      visible.value = !visible.value;
+    }
+
+    return { visible, handleToggle };
   },
 });
 </script>
 
 <template>
   <div :class="[wrapperClass]">
-    <slot name="toggle" />
+    <slot name="toggle" :toggle="handleToggle" />
+    <div v-if="visible" :class="[contentClass]">
+      <slot name="content" />
+    </div>
   </div>
 </template>

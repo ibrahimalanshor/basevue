@@ -33,4 +33,42 @@ describe.only('dropdown component', () => {
 
     expect(wrapper.find('button').exists()).toBe(true);
   });
+
+  // content
+  test('should render content element', async () => {
+    const wrapper = mount(PlainVueDropdown, {
+      slots: {
+        content: () => h('p', 'Content'),
+        toggle: ({ toggle }: { toggle: () => void }) =>
+          h('button', { onClick: toggle }, 'Toggle'),
+      },
+    });
+
+    expect(wrapper.find('p').exists()).toBe(false);
+
+    await wrapper.find('button').trigger('click');
+
+    expect(wrapper.find('p').exists()).toBe(true);
+  });
+
+  // content class
+  test('should have content class', async () => {
+    const wrapper = mount(PlainVueDropdown, {
+      slots: {
+        content: () => h('p', 'Content'),
+        toggle: ({ toggle }: { toggle: () => void }) =>
+          h('button', { onClick: toggle }, 'Toggle'),
+      },
+    });
+
+    await wrapper.find('button').trigger('click');
+
+    expect(wrapper.props('contentClass')).toBeUndefined();
+
+    await wrapper.setProps({
+      contentClass: 'p-4',
+    });
+
+    expect(wrapper.find('.p-4').exists()).toBe(true);
+  });
 });
