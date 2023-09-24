@@ -72,18 +72,18 @@ describe('dropdown component', () => {
     expect(wrapper.find('.p-4').exists()).toBe(true);
   });
 
-  // active modelvalue
-  test('should have default active modelvalue', async () => {
+  // visible modelvalue
+  test('should have default visible modelvalue', async () => {
     const wrapper = mount(PlainVueDropdown);
 
-    expect(wrapper.props('active')).toBe(false);
+    expect(wrapper.props('visible')).toBe(false);
   });
   test('should show content by acive', async () => {
     const wrapper: VueWrapper = mount(PlainVueDropdown, {
       props: {
-        active: false,
+        visible: false,
         programatic: true,
-        'onUpdate:active': (value) => wrapper.setProps({ active: value }),
+        'onUpdate:visible': (value) => wrapper.setProps({ visible: value }),
       },
       slots: {
         content: () => h('p', 'Content'),
@@ -92,7 +92,7 @@ describe('dropdown component', () => {
 
     expect(wrapper.find('p').exists()).toBe(false);
 
-    await wrapper.setProps({ active: true });
+    await wrapper.setProps({ visible: true });
 
     expect(wrapper.find('p').exists()).toBe(true);
   });
