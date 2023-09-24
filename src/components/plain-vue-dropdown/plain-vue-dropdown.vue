@@ -10,5 +10,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div :class="[wrapperClass]"></div>
+  <div :class="[wrapperClass]">
+    <slot name="toggle" />
+  </div>
 </template>

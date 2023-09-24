@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import PlainVueDropdown from './plain-vue-dropdown.vue';
+import { h } from 'vue';
 
 describe.only('dropdown component', () => {
   // wrapper
@@ -20,5 +21,16 @@ describe.only('dropdown component', () => {
 
     expect(wrapper.props('wrapperClass')).toEqual('p-4');
     expect(wrapper.find('div').classes('p-4')).toBe(true);
+  });
+
+  // toggle
+  test('should render toggle slot', () => {
+    const wrapper = mount(PlainVueDropdown, {
+      slots: {
+        toggle: () => h('button', 'Toggle'),
+      },
+    });
+
+    expect(wrapper.find('button').exists()).toBe(true);
   });
 });
