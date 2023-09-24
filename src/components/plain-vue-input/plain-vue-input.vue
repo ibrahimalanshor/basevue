@@ -34,7 +34,7 @@ export default defineComponent({
       default: null,
     },
   },
-  emits: ['clear', 'update:modelValue'],
+  emits: ['clear', 'update:modelValue', 'focus', 'focusout'],
   setup(props, { emit }) {
     const value = computed({
       get() {
@@ -48,8 +48,14 @@ export default defineComponent({
     function handleClear() {
       emit('clear');
     }
+    function handleFocus() {
+      emit('focus');
+    }
+    function handleFocusOut() {
+      emit('focusout');
+    }
 
-    return { value, handleClear };
+    return { value, handleClear, handleFocus, handleFocusOut };
   },
 });
 </script>
@@ -63,6 +69,8 @@ export default defineComponent({
       :placeholder="placeholder"
       :disabled="disabled"
       v-model="value"
+      v-on:focus="handleFocus"
+      v-on:focusout="handleFocusOut"
     />
     <slot name="right-content">
       <slot name="clear" :clear="handleClear" />
