@@ -10,29 +10,29 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    active: {
+    visible: {
       type: Boolean,
       default: false,
     },
   },
-  emits: ['update:active'],
+  emits: ['update:visible'],
   setup(props, { emit }) {
     const programaticVisible = computed({
       get() {
-        return props.active;
+        return props.visible;
       },
       set(value) {
-        emit('update:active', value);
+        emit('update:visible', value);
       },
     });
-    const visible = ref(false);
+    const localVisible = ref(false);
 
     function handleToggle() {
       programaticVisible.value = !programaticVisible.value;
-      visible.value = !visible.value;
+      localVisible.value = !localVisible.value;
     }
 
-    return { programaticVisible, visible, handleToggle };
+    return { programaticVisible, localVisible, handleToggle };
   },
 });
 </script>
@@ -41,7 +41,7 @@ export default defineComponent({
   <div :class="[wrapperClass]">
     <slot name="toggle" :toggle="handleToggle" />
     <div
-      v-if="programatic ? programaticVisible : visible"
+      v-if="programatic ? programaticVisible : localVisible"
       :class="[contentClass]"
     >
       <slot name="content" />
