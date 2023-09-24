@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils';
+import { VueWrapper, mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import PlainVueDropdown from './plain-vue-dropdown.vue';
 import { h } from 'vue';
 
-describe.only('dropdown component', () => {
+describe('dropdown component', () => {
   // wrapper
   test('should have wrapper element', () => {
     const wrapper = mount(PlainVueDropdown);
@@ -70,5 +70,30 @@ describe.only('dropdown component', () => {
     });
 
     expect(wrapper.find('.p-4').exists()).toBe(true);
+  });
+
+  // visible modelvalue
+  test('should have default visible modelvalue', async () => {
+    const wrapper = mount(PlainVueDropdown);
+
+    expect(wrapper.props('visible')).toBe(false);
+  });
+  test('should show content by acive', async () => {
+    const wrapper: VueWrapper = mount(PlainVueDropdown, {
+      props: {
+        visible: false,
+        programatic: true,
+        'onUpdate:visible': (value) => wrapper.setProps({ visible: value }),
+      },
+      slots: {
+        content: () => h('p', 'Content'),
+      },
+    });
+
+    expect(wrapper.find('p').exists()).toBe(false);
+
+    await wrapper.setProps({ visible: true });
+
+    expect(wrapper.find('p').exists()).toBe(true);
   });
 });

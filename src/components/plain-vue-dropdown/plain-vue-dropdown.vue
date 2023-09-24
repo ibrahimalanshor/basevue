@@ -1,20 +1,38 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'PlainVueDropdown',
   props: {
     wrapperClass: String,
     contentClass: String,
+    programatic: {
+      type: Boolean,
+      default: false,
+    },
+    visible: {
+      type: Boolean,
+      default: false,
+    },
   },
-  setup() {
-    const visible = ref(false);
+  emits: ['update:visible'],
+  setup(props, { emit }) {
+    const programaticVisible = computed({
+      get() {
+        return props.visible;
+      },
+      set(value) {
+        emit('update:visible', value);
+      },
+    });
+    const localVisible = ref(false);
 
     function handleToggle() {
-      visible.value = !visible.value;
+      programaticVisible.value = !programaticVisible.value;
+      localVisible.value = !localVisible.value;
     }
 
-    return { visible, handleToggle };
+    return { programaticVisible, localVisible, handleToggle };
   },
 });
 </script>
@@ -22,7 +40,10 @@ export default defineComponent({
 <template>
   <div :class="[wrapperClass]">
     <slot name="toggle" :toggle="handleToggle" />
-    <div v-if="visible" :class="[contentClass]">
+    <div
+      v-if="programatic ? programaticVisible : localVisible"
+      :class="[contentClass]"
+    >
       <slot name="content" />
     </div>
   </div>
