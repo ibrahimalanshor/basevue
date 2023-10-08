@@ -27,11 +27,15 @@ export default defineComponent({
     });
 
     function checkIsActive(item: string | ListItem): boolean {
-      return active.value === (typeof item === 'object' ? item.id : item);
+      if (typeof item === 'object') {
+        return active.value === item.id;
+      }
+
+      return active.value === item;
     }
 
     function handleClickItem(item: string | ListItem) {
-      active.value = item;
+      active.value = typeof item === 'object' ? item.id : item;
 
       emit('click-item', item);
     }
