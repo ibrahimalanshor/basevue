@@ -180,6 +180,61 @@ describe('list component', () => {
 
     expect(wrapper.find('li.active').text()).toBe('item 1');
   });
+  test('should active item object when modelvalue change', async () => {
+    const wrapper = mount(PlainVueList, {
+      props: {
+        items: [
+          {
+            id: 1,
+            name: 'item 1',
+          },
+          {
+            id: 2,
+            name: 'item 2',
+          },
+        ],
+        activeClass: 'active',
+        inactiveClass: 'inactive',
+      },
+    });
+
+    expect(wrapper.find('li.active').exists()).toBe(false);
+    expect(wrapper.findAll('li.inactive')).toHaveLength(2);
+
+    await wrapper.setProps({ modelValue: 2 });
+
+    expect(wrapper.find('li.active').exists()).toBe(true);
+    expect(wrapper.find('li.active').text()).toBe('item 2');
+    expect(wrapper.findAll('li.inactive')).toHaveLength(1);
+  });
+  test('should change modelvalue when item object clicked', async () => {
+    const wrapper: VueWrapper = mount(PlainVueList, {
+      props: {
+        items: [
+          {
+            id: 1,
+            name: 'item 1',
+          },
+          {
+            id: 2,
+            name: 'item 2',
+          },
+        ],
+        activeClass: 'active',
+        inactiveClass: 'inactive',
+        modelValue: 2,
+        'onUpdate:modelValue': (value) =>
+          wrapper.setProps({ modelValue: value }),
+      },
+    });
+
+    expect(wrapper.find('li').classes('active')).toBe(false);
+    expect(wrapper.findAll('li.inactive')).toHaveLength(1);
+
+    await wrapper.find('li').trigger('click');
+
+    expect(wrapper.find('li.active').text()).toBe('item 1');
+  });
 
   // append item
   test('should render append item slot', () => {
